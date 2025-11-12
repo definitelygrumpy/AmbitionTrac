@@ -2,12 +2,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { Activity } from '../types.ts';
 
-export async function generateActivities(ambition: string): Promise<Omit<Activity, 'id' | 'completed'>[]> {
+export async function generateActivities(passion: string): Promise<Omit<Activity, 'id' | 'completed'>[]> {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
     try {
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
-            contents: `Based on the ambition "${ambition}", generate exactly 10 distinct, meaningful, and actionable guided activities to help someone start and progress. Each activity should have a clear title and a short, encouraging description of the task.`,
+            contents: `Based on the passion "${passion}", generate exactly 10 distinct, meaningful, and actionable guided activities to help someone start and progress. Each activity should have a clear title and a short, encouraging description of the task.`,
             config: {
                 responseMimeType: "application/json",
                 responseSchema: {

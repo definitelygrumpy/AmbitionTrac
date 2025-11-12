@@ -18,7 +18,7 @@ export interface Reflection {
 }
 
 export interface UserData {
-    ambition: string | null;
+    passion: string | null;
     activities: Activity[];
     reflections: Reflection[];
     email: string | null;

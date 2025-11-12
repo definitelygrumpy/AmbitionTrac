@@ -25,8 +25,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
     
     const totalUsers = userList.length;
 
-    const totalAmbitions = userList.reduce((acc, key) => {
-        return users[key].ambition ? acc + 1 : acc;
+    const totalPassions = userList.reduce((acc, key) => {
+        return users[key].passion ? acc + 1 : acc;
     }, 0);
 
     const totalActivitiesCompleted = userList.reduce((acc, key) => {
@@ -48,8 +48,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
                 />
                 <StatCard 
                     icon={<ClipboardListIcon className="w-7 h-7 text-white" />} 
-                    title="Ambitions Set" 
-                    value={totalAmbitions}
+                    title="Passions Set" 
+                    value={totalPassions}
                     color="bg-amber-500"
                 />
                 <StatCard 
