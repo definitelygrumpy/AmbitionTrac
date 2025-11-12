@@ -35,7 +35,7 @@ export const signUp = async (username: string, password: string, email?: string)
         password: transformPassword(password), // Unsafe, for demo only
         email: email || null,
         theme: 'light',
-        passion: null,
+        ambition: null,
         activities: [],
         reflections: []
     };

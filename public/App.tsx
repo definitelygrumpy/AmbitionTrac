@@ -5,7 +5,7 @@ import type { Activity, Reflection, Theme, UserData } from './types.ts';
 import { generateActivities } from './services/geminiService.ts';
 import { database } from './services/firebase.ts';
 import Header from './components/Header.tsx';
-import PassionInput from './components/PassionInput.tsx';
+import AmbitionInput from './components/AmbitionInput.tsx';
 import Dashboard from './components/Dashboard.tsx';
 import ActivityList from './components/ActivityList.tsx';
 import Journal from './components/Journal.tsx';
@@ -27,7 +27,7 @@ const App: React.FC = () => {
     const [allUsers, setAllUsers] = useState<{ [key: string]: UserData }>({});
     const [dataLoaded, setDataLoaded] = useState(false);
     const [theme, setTheme] = useState<Theme>('light');
-    const [passion, setPassion] = useState<string | null>(null);
+    const [ambition, setAmbition] = useState<string | null>(null);
     const [activities, setActivities] = useState<Activity[]>([]);
     const [reflections, setReflections] = useState<Reflection[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         setQuote(MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)]);
-        const loggedInUser = localStorage.getItem('passionTracUser');
+        const loggedInUser = localStorage.getItem('ambitionTracUser');
         if (loggedInUser) {
             setCurrentUser(loggedInUser);
             if (loggedInUser === 'Admin') {
@@ -50,7 +50,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         if (!currentUser) {
-            setPassion(null);
+            setAmbition(null);
             setActivities([]);
             setReflections([]);
             setDataLoaded(false);
@@ -80,7 +80,7 @@ const App: React.FC = () => {
             const data = snapshot.val();
             if (data) {
                 setTheme(data.theme || 'light');
-                setPassion(data.passion || null);
+                setAmbition(data.ambition || null);
                 setActivities(data.activities || []);
                 setReflections(data.reflections || []);
             }
@@ -108,13 +108,13 @@ const App: React.FC = () => {
             setIsAdmin(true);
         }
         setCurrentUser(username);
-        localStorage.setItem('passionTracUser', username);
+        localStorage.setItem('ambitionTracUser', username);
     };
 
     const handleLogout = () => {
         setCurrentUser(null);
         setIsAdmin(false);
-        localStorage.removeItem('passionTracUser');
+        localStorage.removeItem('ambitionTracUser');
     };
 
     const toggleTheme = () => {
@@ -129,20 +129,20 @@ const App: React.FC = () => {
         }
     };
 
-    const handleSetPassion = async (newPassion: string) => {
+    const handleSetAmbition = async (newAmbition: string) => {
         setIsGenerating(true);
         setError(null);
         try {
-            const generatedActivities = await generateActivities(newPassion);
+            const generatedActivities = await generateActivities(newAmbition);
             const newActivities = generatedActivities.map((activity, index) => ({ ...activity, id: index, completed: false }));
-            setPassion(newPassion);
+            setAmbition(newAmbition);
             setActivities(newActivities);
             setReflections([]);
 
             if (currentUser && !isAdmin) {
                 const userRef = ref(database, `users/${currentUser}`);
                 const dataToSave = {
-                    passion: newPassion,
+                    ambition: newAmbition,
                     activities: newActivities,
                     reflections: []
                 };
@@ -194,20 +194,20 @@ const App: React.FC = () => {
     };
 
     const handleReset = () => {
-        setPassion(null);
+        setAmbition(null);
         setActivities([]);
         setReflections([]);
         setError(null);
         if (currentUser && !isAdmin) {
             const userRef = ref(database, `users/${currentUser}`);
             const dataToReset = {
-                passion: null,
+                ambition: null,
                 activities: [],
                 reflections: []
             };
             update(userRef, dataToReset).catch(err => {
-                console.error("Failed to reset passion", err);
-                setError("Could not reset your passion.");
+                console.error("Failed to reset ambition", err);
+                setError("Could not reset your ambition.");
             });
         }
     };
@@ -235,15 +235,15 @@ const App: React.FC = () => {
                 <div className="flex flex-col items-center justify-center text-center p-12 bg-white/50 dark:bg-dark-card/50 rounded-xl shadow-lg">
                     <LoaderIcon className="w-12 h-12 animate-spin text-brand-purple" />
                     <h2 className="mt-4 text-xl font-semibold text-gray-700 dark:text-gray-300">Crafting Your Path...</h2>
-                    <p className="mt-2 text-gray-500 dark:text-gray-400">Our AI is generating personalized activities to help you achieve your passion.</p>
+                    <p className="mt-2 text-gray-500 dark:text-gray-400">Our AI is generating personalized activities to help you achieve your ambition.</p>
                 </div>
             );
         }
         
-        if (!passion || activities.length === 0) {
+        if (!ambition || activities.length === 0) {
             return (
                 <div>
-                    <PassionInput onSetPassion={handleSetPassion} />
+                    <AmbitionInput onSetAmbition={handleSetAmbition} />
                     {error && <p className="mt-4 text-center text-red-500">{error}</p>}
                 </div>
             );
@@ -254,14 +254,14 @@ const App: React.FC = () => {
                 <div>
                     <div className="flex justify-between items-start">
                         <div>
-                            <h1 className="text-3xl font-bold text-brand-purple dark:text-purple-400">{passion}</h1>
+                            <h1 className="text-3xl font-bold text-brand-purple dark:text-purple-400">{ambition}</h1>
                             <p className="mt-2 italic text-gray-600 dark:text-gray-400">"{quote}"</p>
                         </div>
                         <button
                             onClick={handleReset}
                             className="px-4 py-2 text-sm font-medium text-white bg-pink-500 rounded-lg shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 dark:bg-dark-accent dark:hover:bg-purple-800 dark:focus:ring-purple-500 dark:ring-offset-dark-bg transition-all"
                         >
-                            Start New Passion
+                            Start New Ambition
                         </button>
                     </div>
                 </div>

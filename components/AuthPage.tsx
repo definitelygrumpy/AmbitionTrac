@@ -42,7 +42,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
                 {isLoginView ? 'Welcome Back!' : 'Create Your Account'}
             </h2>
             <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-                {isLoginView ? 'Log in to continue your journey.' : 'Start tracking your passions today.'}
+                {isLoginView ? 'Log in to continue your journey.' : 'Start tracking your ambitions today.'}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
