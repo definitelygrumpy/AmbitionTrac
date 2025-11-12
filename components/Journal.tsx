@@ -1,5 +1,15 @@
-
-
+/*
+ * ==============================================================================
+ *
+ *   WARNING: THIS FILE IS IN THE ROOT DIRECTORY AND IS NOT DEPLOYED.
+ *
+ *   To make changes to the application, please edit the corresponding file
+ *   in the '/public' directory. For this file, edit:
+ *
+ *   '/public/components/Journal.tsx'
+ *
+ * ==============================================================================
+ */
 import React from 'react';
 import type { Reflection } from '../types.ts';
 import { BookOpenIcon } from './icons.tsx';

@@ -1,4 +1,15 @@
-
+/*
+ * ==============================================================================
+ *
+ *   WARNING: THIS FILE IS IN THE ROOT DIRECTORY AND IS NOT DEPLOYED.
+ *
+ *   To make changes to the application, please edit the corresponding file
+ *   in the '/public' directory. For this file, edit:
+ *
+ *   '/public/components/AmbitionInput.tsx'
+ *
+ * ==============================================================================
+ */
 import React, { useState } from 'react';
 import { SparklesIcon } from './icons.tsx';
 
