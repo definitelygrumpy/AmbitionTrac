@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import { signUp, login } from '../services/authService.ts';
 import { LoaderIcon } from './icons.tsx';
@@ -43,7 +42,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
                 {isLoginView ? 'Welcome Back!' : 'Create Your Account'}
             </h2>
             <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-                {isLoginView ? 'Log in to continue your journey.' : 'Start tracking your ambitions today.'}
+                {isLoginView ? 'Log in to continue your journey.' : 'Start tracking your passions today.'}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -120,7 +119,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
                     }}
                     className="font-medium text-brand-purple dark:text-purple-400 hover:underline"
                 >
-                    {isLoginView ? 'Don\'t have an account? Sign up' : 'Already have an account? Login'}
+                    {isLoginView ? "Don't have an account? Sign up" : 'Already have an account? Login'}
                 </button>
             </p>
         </div>

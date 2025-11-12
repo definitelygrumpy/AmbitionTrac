@@ -21,20 +21,20 @@ export async function generateActivities(passion: string): Promise<Omit<Activity
                                 properties: {
                                     title: {
                                         type: Type.STRING,
-                                        description: "A short, clear title for the activity.",
+                                        description: "A short, clear title for the activity."
                                     },
                                     description: {
                                         type: Type.STRING,
-                                        description: "A one or two sentence description of what to do for this activity.",
-                                    },
+                                        description: "A one or two sentence description of what to do for this activity."
+                                    }
                                 },
-                                required: ["title", "description"],
-                            },
-                        },
+                                required: ["title", "description"]
+                            }
+                        }
                     },
-                    required: ["activities"],
-                },
-            },
+                    required: ["activities"]
+                }
+            }
         });
 
         const jsonResponse = JSON.parse(response.text);

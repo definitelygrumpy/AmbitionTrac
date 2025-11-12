@@ -37,7 +37,7 @@ export const signUp = async (username: string, password: string, email?: string)
         theme: 'light',
         passion: null,
         activities: [],
-        reflections: [],
+        reflections: []
     };
 
     await set(userRef, newUser);

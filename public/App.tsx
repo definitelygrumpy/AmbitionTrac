@@ -144,7 +144,7 @@ const App: React.FC = () => {
                 const dataToSave = {
                     passion: newPassion,
                     activities: newActivities,
-                    reflections: [],
+                    reflections: []
                 };
                 await update(userRef, dataToSave);
             }
@@ -203,7 +203,7 @@ const App: React.FC = () => {
             const dataToReset = {
                 passion: null,
                 activities: [],
-                reflections: [],
+                reflections: []
             };
             update(userRef, dataToReset).catch(err => {
                 console.error("Failed to reset passion", err);
